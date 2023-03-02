@@ -1,0 +1,52 @@
+﻿@model CargoManagement.Models.LoginModel
+@{
+    ViewBag.Title = "LoginEmp";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+         <div class="form-group">
+        @Html.Label("Login Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("UserType", new List<SelectListItem>
+                    {
+               new SelectListItem{Text="Select Login Type"},
+                    new SelectListItem{ Text="Admin", Value = "1" },
+                    new SelectListItem{ Text="Employee", Value = "2" },
+                    new SelectListItem{ Text="Customer", Value = "3" } })
+                
+                @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+            </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Click here to Signup", "Signup")
+</div>
